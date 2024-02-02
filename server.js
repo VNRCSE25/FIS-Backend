@@ -29,6 +29,8 @@ const path=require("path")
 // });
 
 // Allow requests from specific origins
+const cors = require('cors');
+
 const corsOptions = {
   origin: 'https://vnr-fmp.netlify.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
