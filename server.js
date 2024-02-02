@@ -14,12 +14,30 @@ const path=require("path")
 // app.use(exp.static(path.join(__dirname,'./build')))
 
 
-//for validating CORS policy
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+// //for validating CORS policy
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
+
+// //for validating CORS policy v2
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//   next();
+// });
+
+// Allow requests from specific origins
+const corsOptions = {
+  origin: 'https://vnr-fmp.netlify.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow credentials such as cookies
+  optionsSuccessStatus: 204,
+  allowedHeaders: 'Content-Type, Authorization', // Include necessary headers
+};
+
+app.use(cors(corsOptions));
 
 //connect user api
 const userApp=require("./APIs/userAPI")
