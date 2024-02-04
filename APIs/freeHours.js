@@ -139,30 +139,54 @@ freehoursapp.get(
         const d = ele[day];
         const events = ele?.['special']?.[day];
         times.forEach((time) => {
-          console.log(d?.[time])
-          if (d?.[time]) {
+          console.log(d?.[time]);
+      
+          // Check if d[time] is an array before using every
+          if (Array.isArray(d?.[time])) {
             if (!d[time].every((opt) => years.includes(opt))) {
               value = false;
             }
-            if(years[0]==='0')
-            value=false;
+            if (years[0] === '0') {
+              value = false;
+            }
+          } else if (d?.[time] !== undefined) {
+            // Handle the case when d[time] is not an array
+            if (!years.includes(d[time])) {
+              value = false;
+            }
+            if (years[0] === '0') {
+              value = false;
+            }
           }
-          if (events?.[time]) {
+      
+          // Check if events[time] is an array before using every
+          if (Array.isArray(events?.[time])) {
+            if (!events[time].every((opt) => years.includes(opt))) {
+              value = false;
+            }
+            if (years[0] === '0') {
+              value = false;
+            }
+          } else if (events?.[time] !== undefined) {
+            // Handle the case when events[time] is not an array
             if (!years.includes(events[time])) {
               value = false;
             }
-            if(years[0]==='0')
-            value=false;
+            if (years[0] === '0') {
+              value = false;
+            }
           }
         });
-        console.log(ele.username, d, events, value)
-        console.log('-------')
+      
+        console.log(ele.username, d, events, value);
+        console.log('-------');
+      
         if (value === true) {
           array.push(ele.username);
         } else {
           barray.push(ele.username);
         }
-      });
+      });      
       console.log(array)
       // Check array length instead of truthiness
       if (array.length > 0) {
