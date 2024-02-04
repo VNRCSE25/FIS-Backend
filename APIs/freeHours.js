@@ -140,24 +140,19 @@ freehoursapp.get(
         const events = ele?.['special']?.[day];
         times.forEach((time) => {
           console.log(d?.[time])
-          // Check if d[time] is an array before using every
-          if (Array.isArray(d?.[time])) {
+          if (d?.[time]) {
             if (!d[time].every((opt) => years.includes(opt))) {
               value = false;
             }
-            if (years[0] === '0') {
-              value = false;
-            }
+            if(years[0]==='0')
+            value=false;
           }
-
-          // Check if events[time] is an array before using every
-          if (Array.isArray(events?.[time])) {
-            if (!events[time].every((opt) => years.includes(opt))) {
+          if (events?.[time]) {
+            if (!years.includes(events[time])) {
               value = false;
             }
-            if (years[0] === '0') {
-              value = false;
-            }
+            if(years[0]==='0')
+            value=false;
           }
         });
         console.log(ele.username, d, events, value)
