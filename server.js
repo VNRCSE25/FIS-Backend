@@ -85,10 +85,10 @@ mclient.connect(`${process.env.MONGO_URL}`)
 
 
 //middleware to deal with page refresh
-const pageRefresh=(request,response,next)=>{
-response.sendFile(path.join(__dirname,'./build/index.html'))
-}
-app.use("*",pageRefresh)
+// const pageRefresh=(request,response,next)=>{
+// response.sendFile(path.join(__dirname,'./build/index.html'))
+// }
+// app.use("*",pageRefresh)
 
 
 //create a middleware to handle invalid path
