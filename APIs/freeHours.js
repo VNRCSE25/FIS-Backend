@@ -62,7 +62,7 @@ freehoursapp.post("/fac-update", expressAsyncHandler(async (req, res) => {
 
         if (timevalue.toUpperCase() !== 'SEM') {
           // Schedule the deletion of the data after the specified time
-          const times = parseInt(timevalue, 10) * 60 * 1000;
+          const times = parseInt(timevalue, 10) * 60 * 1000 * 60 *24 ;
           schedule.scheduleJob(new Date(Date.now() + times), async () => {
             const deleteResult1 = await freeHoursObj.updateOne(
               { username: username.trim() },
@@ -129,18 +129,15 @@ freehoursapp.get(
       const y = req.params.year;
       const times = t.split(",").map((year) => year.replace(/\./g, '_'));
       const years = y.split(",");
-      console.log(years)
       let array = [];
       let barray = [];
-      console.log(times)
-      console.log('hihi')
       doc.forEach((ele) => {
         let value = true;
         const d = ele[day];
         const events = ele?.['special']?.[day];
         times.forEach((time) => {
           console.log(d?.[time]);
-      
+
           // Check if d[time] is an array before using every
           if (Array.isArray(d?.[time])) {
             if (!d[time].every((opt) => years.includes(opt))) {
@@ -177,17 +174,12 @@ freehoursapp.get(
             }
           }
         });
-      
-        console.log(ele.username, d, events, value);
-        console.log('-------');
-      
         if (value === true) {
           array.push(ele.username);
         } else {
           barray.push(ele.username);
         }
-      });      
-      console.log(array)
+      });
       // Check array length instead of truthiness
       if (array.length > 0) {
         res.json(array);
