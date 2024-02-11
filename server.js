@@ -34,7 +34,7 @@ const cors = require('cors');
 const corsOptions = {
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add other HTTP methods as needed
-  allowedHeaders: ['Content-Type', 'Authorization'], // Add other allowed headers as needed
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Accept', 'Content-Type', 'Authorization'], // Add other allowed headers as needed
   credentials: true, // Allow credentials such as cookies
   optionsSuccessStatus: 204, // Return No Content for preflight OPTIONS requests
 };
