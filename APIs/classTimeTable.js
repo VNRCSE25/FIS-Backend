@@ -165,16 +165,21 @@ classtimetableApp.post("/class-insert", expressAsyncHandler(async (req, res) => 
                     }
                     //if it is a single lab
                     else {
-                        const d = facultydata[x[0].toUpperCase()]
-                        const insertobj = d
-                        insertobj['subject'] = x[0].toUpperCase()
-                        const fac = insertobj
-                        fac['classtype'] = 'Lab'
-                        fac['class'] = sheetname
-                        freehrs(sheetname[0], day, timings, fac, freeHoursObj)
-                        fun(p[2][1], day, timings, fac, facultyTimeTableObj, sem)
-                        obj[timings] = insertobj
-
+                        const d = facultydata[x[0]?.toUpperCase()]; // Handle potential undefined
+                        if (d) {
+                            const insertobj = d || {}; // Handle potential undefined
+                            insertobj['subject'] = x[0]?.toUpperCase() || ''; // Handle potential undefined
+                            const fac = insertobj;
+                            fac['classtype'] = 'Lab';
+                            fac['class'] = sheetname;
+                            freehrs(sheetname[0], day, timings, fac, freeHoursObj);
+                            fun(p[2][1], day, timings, fac, facultyTimeTableObj, sem);
+                            obj[timings] = insertobj;
+                        } else {
+                            const insertobj = {};
+                            insertobj['subject'] = x[0]?.toUpperCase() || ''; // Handle potential undefined
+                            obj[timings] = insertobj;
+                        }
                     }
                 }
                 //if sub is not lab
