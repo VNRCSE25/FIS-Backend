@@ -32,7 +32,7 @@ const path=require("path")
 const cors = require('cors');
 
 const corsOptions = {
-  origin: 'https://vnr-fmp.netlify.app',
+  origin: 'https://vnr-fmp.netlify.app/*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow credentials such as cookies
   optionsSuccessStatus: 204,
