@@ -40,7 +40,7 @@ userApp.post("/facultydata", expressAsyncHandler(async (req, res) => {
     } catch (error) {
         res.status(500).send({ message: "error in inserting"});
     }
-    console.log('endi rane bdaha')
+    // console.log('endi rane bdaha')
     res.status(201).send({ message: "User Created", payload: req.body });
 }));
 
